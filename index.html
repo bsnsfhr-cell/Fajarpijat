@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pajar Pijat - Refleksi & Terapi Profesional Temanggung</title>
+    <title>Pajar Pijat - Spesialis Syaraf Terjepit & Tulang Belakang</title>
     
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -30,7 +30,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Page Transitions */
         .page-content {
             display: none;
             opacity: 0;
@@ -42,32 +41,18 @@
             opacity: 1;
         }
 
-        /* Custom UI Elements */
         .nav-scrolled {
             background: rgba(255, 255, 255, 0.95) !important;
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
         }
 
-        .gold-gradient {
-            background: linear-gradient(135deg, #d4af37 0%, #f1d37c 100%);
-        }
-
         .hero-section {
             background: linear-gradient(rgba(26, 60, 52, 0.8), rgba(26, 60, 52, 0.8)), 
-                        url('https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&w=1920&q=80');
+                        url('https://images.unsplash.com/photo-1579154341098-e027b1b59f42?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-        }
-
-        .custom-shape-divider-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
         }
 
         .whatsapp-btn {
@@ -100,7 +85,12 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.5s ease;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px border rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
@@ -110,7 +100,7 @@
     <div class="loader-wrapper" id="loader">
         <div class="text-white text-center">
             <div class="inline-block w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-            <h2 class="text-xl font-bold tracking-widest">PAJAR PIJAT</h2>
+            <h2 class="text-xl font-bold tracking-widest uppercase">Pajar Pijat</h2>
         </div>
     </div>
 
@@ -128,7 +118,7 @@
                 <a href="javascript:void(0)" onclick="navigateTo('services')" class="hover:text-amber-600 transition">Layanan</a>
                 <a href="javascript:void(0)" onclick="navigateTo('gallery')" class="hover:text-amber-600 transition">Galeri</a>
                 <a href="javascript:void(0)" onclick="navigateTo('contact')" class="hover:text-amber-600 transition">Kontak</a>
-                <a href="https://wa.me/6287737061871" class="bg-emerald-900 text-white px-6 py-3 rounded-full hover:bg-emerald-800 transition shadow-lg">Booking</a>
+                <a href="https://wa.me/6287737061871" class="bg-emerald-900 text-white px-6 py-3 rounded-full hover:bg-emerald-800 transition shadow-lg">Konsultasi</a>
             </div>
 
             <button class="md:hidden text-2xl" id="mobileMenuBtn">
@@ -137,14 +127,14 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
+    <!-- Mobile Menu -->
     <div id="mobileMenu" class="fixed inset-0 bg-emerald-900 z-[60] hidden flex-col justify-center items-center text-white space-y-8 text-2xl font-bold">
         <button class="absolute top-8 right-8" id="closeMenuBtn"><i class="fas fa-times"></i></button>
-        <a href="javascript:void(0)" onclick="navigateTo('home'); closeMobileMenu()" class="hover:text-amber-400 transition">Beranda</a>
-        <a href="javascript:void(0)" onclick="navigateTo('about'); closeMobileMenu()" class="hover:text-amber-400 transition">Tentang</a>
-        <a href="javascript:void(0)" onclick="navigateTo('services'); closeMobileMenu()" class="hover:text-amber-400 transition">Layanan</a>
-        <a href="javascript:void(0)" onclick="navigateTo('gallery'); closeMobileMenu()" class="hover:text-amber-400 transition">Galeri</a>
-        <a href="javascript:void(0)" onclick="navigateTo('contact'); closeMobileMenu()" class="hover:text-amber-400 transition">Kontak</a>
+        <a href="javascript:void(0)" onclick="navigateTo('home'); closeMobileMenu()" class="hover:text-amber-400">Beranda</a>
+        <a href="javascript:void(0)" onclick="navigateTo('about'); closeMobileMenu()" class="hover:text-amber-400">Tentang</a>
+        <a href="javascript:void(0)" onclick="navigateTo('services'); closeMobileMenu()" class="hover:text-amber-400">Layanan</a>
+        <a href="javascript:void(0)" onclick="navigateTo('gallery'); closeMobileMenu()" class="hover:text-amber-400">Galeri</a>
+        <a href="javascript:void(0)" onclick="navigateTo('contact'); closeMobileMenu()" class="hover:text-amber-400">Kontak</a>
     </div>
 
     <!-- WhatsApp Floating -->
@@ -152,84 +142,148 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- PAGE 1: BERANDA (Home) -->
+    <!-- PAGE 1: BERANDA -->
     <div id="home-page" class="page-content page-active">
-        <!-- Hero Section -->
+        <!-- Hero -->
         <section class="hero-section relative min-h-screen flex items-center pt-20 overflow-hidden">
             <div class="container mx-auto px-6 relative z-10 text-white">
-                <div class="max-w-3xl" data-aos="fade-up">
-                    <span class="inline-block px-4 py-1 border border-amber-500 text-amber-500 rounded-full mb-6 font-bold tracking-widest text-sm uppercase">Pusat Relaksasi Temanggung</span>
-                    <h1 class="text-5xl md:text-8xl font-bold leading-tight mb-6">Tubuh Segar, Pikiran <span class="text-amber-500 italic">Tenang.</span></h1>
+                <div class="max-w-3xl" data-aos="fade-right">
+                    <span class="inline-block px-4 py-1 border border-amber-500 text-amber-500 rounded-full mb-6 font-bold tracking-widest text-sm uppercase italic">Spesialis Terapi Tulang & Syaraf</span>
+                    <h1 class="text-5xl md:text-8xl font-bold leading-tight mb-6">Solusi Tepat <span class="text-amber-500 italic">Syaraf Terjepit.</span></h1>
                     <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl font-light leading-relaxed">
-                        Nikmati layanan pijat profesional dengan teknik terbaik untuk menghilangkan stres, lelah, dan mengembalikan energi vitalitas Anda secara maksimal.
+                        Klinik terapi profesional dengan teknik reposisi tulang belakang dan penanganan syaraf yang aman, efektif, dan tanpa operasi. Kembalikan mobilitas Anda bersama kami.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="https://wa.me/6287737061871" class="bg-amber-600 px-10 py-5 rounded-full font-bold hover:bg-amber-500 transition-all text-center shadow-xl hover:-translate-y-1">Reservasi Sekarang</a>
-                        <a href="javascript:void(0)" onclick="navigateTo('services')" class="backdrop-blur-md bg-white/10 px-10 py-5 rounded-full font-bold border border-white/20 hover:bg-white/20 transition-all text-center">Lihat Menu Layanan</a>
+                        <a href="https://wa.me/6287737061871" class="bg-amber-600 px-10 py-5 rounded-full font-bold hover:bg-amber-500 transition-all text-center shadow-xl uppercase tracking-widest text-sm">Reservasi Darurat</a>
+                        <a href="javascript:void(0)" onclick="navigateTo('services')" class="backdrop-blur-md bg-white/10 px-10 py-5 rounded-full font-bold border border-white/20 hover:bg-white/20 transition-all text-center uppercase tracking-widest text-sm">Lihat Spesialisasi Kami</a>
                     </div>
                 </div>
-            </div>
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white">
-                <i class="fas fa-chevron-down text-2xl"></i>
             </div>
         </section>
 
         <!-- Stats Section -->
-        <section class="py-20 bg-white border-b border-gray-100">
+        <section class="py-12 bg-emerald-950 text-white border-y border-white/10">
             <div class="container mx-auto px-6">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    <div class="text-center" data-aos="fade-up">
-                        <h3 class="text-4xl font-bold text-emerald-900 mb-2">1.5k+</h3>
-                        <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Pelanggan Puas</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div data-aos="zoom-in">
+                        <div class="text-4xl font-bold text-amber-500 mb-2">12+</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-400">Tahun Pengalaman</div>
                     </div>
-                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="text-4xl font-bold text-emerald-900 mb-2">12+</h3>
-                        <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Terapis Ahli</p>
+                    <div data-aos="zoom-in" data-aos-delay="100">
+                        <div class="text-4xl font-bold text-amber-500 mb-2">5000+</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-400">Pasien Terbantu</div>
                     </div>
-                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="text-4xl font-bold text-emerald-900 mb-2">10+</h3>
-                        <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Tahun Pengalaman</p>
+                    <div data-aos="zoom-in" data-aos-delay="200">
+                        <div class="text-4xl font-bold text-amber-500 mb-2">100%</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-400">Metode Alami</div>
                     </div>
-                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="text-4xl font-bold text-emerald-900 mb-2">4.9</h3>
-                        <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Rating Layanan</p>
+                    <div data-aos="zoom-in" data-aos-delay="300">
+                        <div class="text-4xl font-bold text-amber-500 mb-2">24/7</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-400">Layanan Darurat</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Why Us Section -->
+        <!-- Warning Signs Section -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold text-emerald-900">Jangan Abaikan Gejala Ini</h2>
+                    <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Masalah tulang belakang dan syaraf seringkali dimulai dari rasa sakit ringan yang jika dibiarkan bisa berakibat fatal pada mobilitas Anda.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-8 border border-red-100 rounded-3xl bg-red-50/30 group hover:bg-red-500 hover:text-white transition-all duration-500" data-aos="fade-up">
+                        <i class="fas fa-bolt text-red-500 text-3xl mb-4 group-hover:text-white"></i>
+                        <h4 class="font-bold text-xl mb-2">Nyeri Menjalar</h4>
+                        <p class="opacity-70 group-hover:opacity-100 italic">Rasa nyeri yang menjalar dari pinggang hingga ke ujung kaki (gejala syaraf terjepit/Sciatica).</p>
+                    </div>
+                    <div class="p-8 border border-red-100 rounded-3xl bg-red-50/30 group hover:bg-red-500 hover:text-white transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fas fa-hand-rock text-red-500 text-3xl mb-4 group-hover:text-white"></i>
+                        <h4 class="font-bold text-xl mb-2">Kesemutan & Kebas</h4>
+                        <p class="opacity-70 group-hover:opacity-100 italic">Rasa baal atau mati rasa pada bagian tubuh tertentu akibat hambatan aliran darah dan syaraf.</p>
+                    </div>
+                    <div class="p-8 border border-red-100 rounded-3xl bg-red-50/30 group hover:bg-red-500 hover:text-white transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fas fa-accessibility text-red-500 text-3xl mb-4 group-hover:text-white"></i>
+                        <h4 class="font-bold text-xl mb-2">Postur Miring</h4>
+                        <p class="opacity-70 group-hover:opacity-100 italic">Tulang belakang terasa tidak lurus atau bahu tinggi sebelah akibat pergeseran sendi kronis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Slider Mock -->
         <section class="py-24 bg-gray-50">
             <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+                    <div data-aos="fade-right">
+                        <h2 class="text-4xl font-bold text-emerald-900">Kata Mereka</h2>
+                        <p class="text-gray-500 mt-2 italic">Kisah nyata pemulihan dari pasien kami</p>
+                    </div>
+                    <div class="hidden md:flex space-x-4">
+                        <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-emerald-900 hover:text-white transition"><i class="fas fa-arrow-left"></i></button>
+                        <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-emerald-900 hover:text-white transition"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-10 rounded-3xl shadow-sm italic text-gray-600 relative border-l-4 border-amber-500" data-aos="fade-up">
+                        <i class="fas fa-quote-left text-4xl text-amber-100 absolute top-6 right-6"></i>
+                        <p class="mb-6">"Sudah 2 tahun saya menderita syaraf terjepit di pinggang, sudah ke berbagai tempat belum ada hasil. Setelah 3 kali sesi di Pajar Pijat, sekarang saya bisa berjalan normal lagi tanpa rasa sakit."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full mr-4 overflow-hidden">
+                                <img src="https://i.pravatar.cc/150?u=1" alt="Avatar">
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-emerald-900">Bpk. Slamet</h5>
+                                <p class="text-xs text-gray-400 italic">Wiraswasta, Temanggung</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 rounded-3xl shadow-sm italic text-gray-600 relative border-l-4 border-amber-500" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fas fa-quote-left text-4xl text-amber-100 absolute top-6 right-6"></i>
+                        <p class="mb-6">"Anak saya keseleo parah saat main bola sampai bengkak biru. Langsung dibawa ke sini, dalam semalam bengkaknya hilang dan besoknya sudah bisa jalan pelan-pelan. Luar biasa!"</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full mr-4 overflow-hidden">
+                                <img src="https://i.pravatar.cc/150?u=2" alt="Avatar">
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-emerald-900">Ibu Ratna</h5>
+                                <p class="text-xs text-gray-400 italic">Ibu Rumah Tangga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 2: TENTANG -->
+    <div id="about-page" class="page-content">
+        <!-- Main About -->
+        <section class="py-32 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16">
                     <div class="md:w-1/2" data-aos="fade-right">
-                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" class="rounded-[40px] shadow-2xl" alt="Layanan Pajar Pijat">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=600&q=80" class="rounded-3xl shadow-2xl relative z-10" alt="Founder">
+                            <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-amber-500 rounded-3xl -z-0 opacity-20"></div>
+                        </div>
                     </div>
                     <div class="md:w-1/2" data-aos="fade-left">
-                        <h2 class="text-4xl font-bold text-emerald-900 mb-6">Mengapa Memilih <span class="text-amber-600">Pajar Pijat?</span></h2>
-                        <p class="text-gray-600 mb-8">Kami mengombinasikan warisan teknik pijat tradisional dengan standar kenyamanan modern untuk hasil yang optimal bagi tubuh Anda.</p>
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="bg-white p-3 rounded-xl shadow-sm mr-4 text-amber-600"><i class="fas fa-leaf"></i></div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Minyak Esensial Alami</h4>
-                                    <p class="text-sm text-gray-500">Menggunakan bahan organik untuk kesehatan kulit.</p>
-                                </div>
+                        <span class="text-amber-600 font-bold uppercase tracking-widest text-sm">Cerita Kami</span>
+                        <h2 class="text-5xl font-bold text-emerald-900 mt-2 mb-6 leading-tight">Dedikasi Untuk <br> Kesembuhan Alami</h2>
+                        <div class="prose text-gray-600 leading-relaxed space-y-4">
+                            <p>Berawal dari keinginan membantu sesama yang menderita karena masalah fisik, <strong>Pajar Pijat</strong> lahir sebagai solusi alternatif yang menggabungkan teknik pijat tradisional dan pemahaman kerangka tubuh modern.</p>
+                            <p>Kami telah menangani ribuan kasus mulai dari keseleo ringan hingga kelumpuhan akibat syaraf terjepit menahun dengan izin Allah.</p>
+                        </div>
+                        <div class="mt-10 grid grid-cols-2 gap-6">
+                            <div class="border-l-4 border-emerald-900 pl-4">
+                                <h4 class="font-bold text-emerald-900 italic">Visi</h4>
+                                <p class="text-xs text-gray-500 italic">Menjadi pusat terapi tulang & syaraf terpercaya di Jawa Tengah.</p>
                             </div>
-                            <div class="flex items-start">
-                                <div class="bg-white p-3 rounded-xl shadow-sm mr-4 text-amber-600"><i class="fas fa-hand-holding-heart"></i></div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Terapis Profesional</h4>
-                                    <p class="text-sm text-gray-500">Sertifikasi resmi dan berpengalaman di bidangnya.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-white p-3 rounded-xl shadow-sm mr-4 text-amber-600"><i class="fas fa-shield-alt"></i></div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Privasi Terjamin</h4>
-                                    <p class="text-sm text-gray-500">Ruangan privat dan steril untuk kenyamanan Anda.</p>
-                                </div>
+                            <div class="border-l-4 border-amber-500 pl-4">
+                                <h4 class="font-bold text-emerald-900 italic">Misi</h4>
+                                <p class="text-xs text-gray-500 italic">Memberikan penanganan akurat tanpa ketergantungan obat kimia.</p>
                             </div>
                         </div>
                     </div>
@@ -237,355 +291,379 @@
             </div>
         </section>
 
-        <!-- Newsletter Section -->
-        <section class="py-20 bg-emerald-900 text-white">
-            <div class="container mx-auto px-6 text-center" data-aos="zoom-in">
-                <h2 class="text-3xl font-bold mb-4">Ingin Promo Menarik?</h2>
-                <p class="text-emerald-200 mb-8">Dapatkan update layanan dan diskon khusus setiap bulannya melalui WhatsApp.</p>
-                <a href="https://wa.me/6287737061871" class="inline-block bg-white text-emerald-900 px-10 py-4 rounded-full font-bold hover:bg-amber-500 hover:text-white transition shadow-xl">Join WhatsApp List</a>
-            </div>
-        </section>
-    </div>
-
-    <!-- PAGE 2: TENTANG (About) -->
-    <div id="about-page" class="page-content py-32">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
+        <!-- Our Values -->
+        <section class="py-24 bg-emerald-950 text-white overflow-hidden">
+            <div class="container mx-auto px-6">
                 <div class="text-center mb-16" data-aos="fade-up">
-                    <span class="text-amber-600 font-bold tracking-widest uppercase text-sm">Cerita Kami</span>
-                    <h2 class="text-5xl font-bold text-emerald-900 mt-2">Didedikasikan Untuk <br> Kesejahteraan Anda</h2>
+                    <h2 class="text-4xl font-bold italic">Mengapa Memilih Kami?</h2>
                 </div>
-                
-                <div class="prose prose-lg mx-auto text-gray-600 leading-relaxed mb-20" data-aos="fade-up">
-                    <p class="mb-6">Berawal dari keinginan untuk melestarikan kearifan lokal Temanggung dalam hal terapi kesehatan tradisional, <strong>Pajar Pijat</strong> didirikan sebagai oase di tengah kesibukan masyarakat modern. Kami memahami bahwa kesehatan fisik tidak dapat dipisahkan dari kedamaian pikiran.</p>
-                    <p class="mb-6">Selama lebih dari satu dekade, kami telah melayani ribuan pelanggan, mulai dari pekerja kantoran, atlet, hingga lansia. Setiap sentuhan yang diberikan oleh terapis kami memiliki tujuan: menyelaraskan kembali energi tubuh Anda yang terdistorsi oleh rutinitas.</p>
-                    <div class="bg-emerald-50 p-8 rounded-2xl border-l-4 border-amber-500 my-10 italic">
-                        "Visi kami adalah menjadi partner kesehatan terdepan di Jawa Tengah yang mengutamakan kualitas, ketulusan hati, dan kenyamanan pelanggan."
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="text-center p-6" data-aos="fade-up">
+                        <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-user-md text-amber-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2 italic">Ahli & Terlatih</h4>
+                        <p class="text-xs text-emerald-100/60 leading-relaxed">Terapis memiliki sertifikasi dan jam terbang tinggi dalam menangani kasus syaraf.</p>
                     </div>
-                </div>
-
-                <!-- Team Section -->
-                <h3 class="text-3xl font-bold text-center mb-12 text-emerald-900">Nilai Inti Kami</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-2xl shadow-sm text-center" data-aos="fade-up">
-                        <i class="fas fa-heart text-amber-500 text-3xl mb-4"></i>
-                        <h4 class="font-bold text-lg mb-2 text-emerald-900">Ketulusan</h4>
-                        <p class="text-sm text-gray-500">Kami bekerja dengan hati untuk kesembuhan Anda.</p>
+                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-hand-holding-heart text-amber-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2 italic">Sentuhan Personal</h4>
+                        <p class="text-xs text-emerald-100/60 leading-relaxed">Setiap pasien mendapatkan diagnosa yang spesifik sesuai keluhannya.</p>
                     </div>
-                    <div class="bg-white p-8 rounded-2xl shadow-sm text-center" data-aos="fade-up" data-aos-delay="100">
-                        <i class="fas fa-star text-amber-500 text-3xl mb-4"></i>
-                        <h4 class="font-bold text-lg mb-2 text-emerald-900">Kualitas</h4>
-                        <p class="text-sm text-gray-500">Standar terbaik untuk setiap detik pelayanan.</p>
+                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-leaf text-amber-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2 italic">Tanpa Operasi</h4>
+                        <p class="text-xs text-emerald-100/60 leading-relaxed">Fokus pada pemulihan mandiri tubuh melalui stimulasi syaraf dan tulang.</p>
                     </div>
-                    <div class="bg-white p-8 rounded-2xl shadow-sm text-center" data-aos="fade-up" data-aos-delay="200">
-                        <i class="fas fa-sync text-amber-500 text-3xl mb-4"></i>
-                        <h4 class="font-bold text-lg mb-2 text-emerald-900">Inovasi</h4>
-                        <p class="text-sm text-gray-500">Selalu mengupdate teknik untuk hasil maksimal.</p>
+                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-history text-amber-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2 italic">Aman & Terpercaya</h4>
+                        <p class="text-xs text-emerald-100/60 leading-relaxed">Metode yang kami gunakan sudah teruji bertahun-tahun tanpa efek samping.</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold text-emerald-900">Alur Sesi Terapi</h2>
+                    <p class="text-gray-500 mt-2 italic">Apa yang Anda harapkan saat datang ke klinik kami</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute top-1/2 left-0 w-full h-1 bg-emerald-100 -translate-y-1/2 hidden md:block"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                        <div class="relative bg-white p-6 text-center" data-aos="fade-up">
+                            <div class="w-10 h-10 bg-emerald-900 text-white rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 font-bold">1</div>
+                            <h5 class="font-bold mb-2">Konsultasi</h5>
+                            <p class="text-xs text-gray-500">Pengecekan gejala dan riwayat kesehatan.</p>
+                        </div>
+                        <div class="relative bg-white p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                            <div class="w-10 h-10 bg-emerald-900 text-white rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 font-bold">2</div>
+                            <h5 class="font-bold mb-2">Diagnosa Manual</h5>
+                            <p class="text-xs text-gray-500">Pencarian titik sumbatan syaraf atau pergeseran tulang.</p>
+                        </div>
+                        <div class="relative bg-white p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+                            <div class="w-10 h-10 bg-emerald-900 text-white rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 font-bold">3</div>
+                            <h5 class="font-bold mb-2">Tindakan Terapi</h5>
+                            <p class="text-xs text-gray-500">Proses pijat medis dan reposisi sesuai kebutuhan.</p>
+                        </div>
+                        <div class="relative bg-white p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+                            <div class="w-10 h-10 bg-emerald-900 text-white rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 font-bold">4</div>
+                            <h5 class="font-bold mb-2">Aftercare</h5>
+                            <p class="text-xs text-gray-500">Edukasi posisi tubuh dan latihan penguatan otot.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- PAGE 3: LAYANAN (Services) -->
-    <div id="services-page" class="page-content py-32 bg-gray-50">
+    <!-- PAGE 3: LAYANAN -->
+    <div id="services-page" class="page-content">
+        <!-- Pricing / Services List -->
+        <section class="py-32 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-20" data-aos="fade-up">
+                    <span class="text-amber-600 font-bold uppercase tracking-widest text-sm">Spesialisasi Terapi</span>
+                    <h2 class="text-5xl font-bold text-emerald-900 mt-2 leading-tight">Layanan Pemulihan <br> Syaraf & Tulang</h2>
+                    <div class="w-24 h-1 bg-amber-500 mx-auto mt-6"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Syaraf Terjepit -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm service-hover transition-all duration-300 border-t-8 border-emerald-900" data-aos="fade-up">
+                        <div class="p-8">
+                            <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 text-emerald-900">
+                                <i class="fas fa-disease text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-emerald-900 mb-4 italic">Syaraf Terjepit (HNP)</h3>
+                            <p class="text-gray-500 text-sm mb-6 leading-relaxed">Terapi khusus untuk meredakan tekanan pada bantalan tulang belakang (HNP) di area leher, punggung, atau pinggang.</p>
+                            <ul class="text-xs space-y-4 text-gray-600 mb-8 font-medium">
+                                <li><i class="fas fa-check-circle text-amber-500 mr-2"></i> Teknik Dekompresi Manual</li>
+                                <li><i class="fas fa-check-circle text-amber-500 mr-2"></i> Penanganan Saraf Sciatica</li>
+                                <li><i class="fas fa-check-circle text-amber-500 mr-2"></i> Durasi 90-120 Menit</li>
+                            </ul>
+                            <a href="https://wa.me/6287737061871?text=Konsultasi%20Syaraf%20Terjepit" class="block text-center bg-emerald-900 text-white py-4 rounded-full font-bold hover:bg-amber-600 transition shadow-lg uppercase tracking-widest text-xs">Reservasi Sesi</a>
+                        </div>
+                    </div>
+
+                    <!-- Tulang Belakang Geser -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm service-hover transition-all duration-300 border-t-8 border-amber-600" data-aos="fade-up" data-aos-delay="100">
+                        <div class="p-8">
+                            <div class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 text-amber-600">
+                                <i class="fas fa-bone text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-emerald-900 mb-4 italic">Reposisi Tulang</h3>
+                            <p class="text-gray-500 text-sm mb-6 leading-relaxed">Menangani pergeseran tulang belakang (Spondylolisthesis) atau sendi yang tidak presisi akibat benturan atau salah posisi.</p>
+                            <ul class="text-xs space-y-4 text-gray-600 mb-8 font-medium">
+                                <li><i class="fas fa-check-circle text-amber-500 mr-2"></i> Penyelarasan Tulang (Alignment)</li>
+                                <li><i class="fas fa-check-circle text-amber-500 mr-2"></i> Koreksi Postur Skoliosis</li>
+                                <li><i class="fas fa-check-circle text-amber-500 mr-2"></i> Evaluasi Postur Tubuh</li>
+                            </ul>
+                            <a href="https://wa.me/6287737061871?text=Konsultasi%20Reposisi%20Tulang" class="block text-center bg-amber-600 text-white py-4 rounded-full font-bold hover:bg-emerald-900 transition shadow-lg uppercase tracking-widest text-xs">Konsultasi Reposisi</a>
+                        </div>
+                    </div>
+
+                    <!-- Keseleo / Cedera Otot -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm service-hover transition-all duration-300 border-t-8 border-emerald-900" data-aos="fade-up" data-aos-delay="200">
+                        <div class="p-8">
+                            <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 text-emerald-900">
+                                <i class="fas fa-band-aid text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-emerald-900 mb-4 italic">Cedera & Keseleo</h3>
+                            <p class="text-gray-500 text-sm mb-6 leading-relaxed">Penanganan cepat untuk cedera olahraga, salah urat, terkilir/keseleo lama maupun baru agar tidak bengkak permanen.</p>
+                            <ul class="text-xs space-y-4 text-gray-600 mb-8 font-medium">
+                                <li><i class="fas fa-check-circle text-amber-500 mr-2"></i> Terapi Tendon & Ligamen</li>
+                                <li><i class="fas fa-check-circle text-amber-500 mr-2"></i> Pijat Sport Pemulihan</li>
+                                <li><i class="fas fa-check-circle text-amber-500 mr-2"></i> Penanganan Dislokasi Sendi</li>
+                            </ul>
+                            <a href="https://wa.me/6287737061871?text=Konsultasi%20Cedera%20Keseleo" class="block text-center bg-emerald-900 text-white py-4 rounded-full font-bold hover:bg-amber-600 transition shadow-lg uppercase tracking-widest text-xs">Tangani Segera</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-4xl font-bold text-emerald-900 mb-12 italic text-center">Pertanyaan Umum (FAQ)</h2>
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-100 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-bold text-emerald-900 py-4 hover:text-amber-600 transition">
+                                <span>Apakah terapi ini sakit?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <p class="text-xs text-gray-500 leading-relaxed">Ada rasa tidak nyaman saat proses reposisi, namun itu adalah bagian dari proses penyelarasan. Setelah sesi berakhir, tubuh akan terasa jauh lebih ringan.</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-bold text-emerald-900 py-4 hover:text-amber-600 transition">
+                                <span>Berapa kali sesi yang dibutuhkan?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <p class="text-xs text-gray-500 leading-relaxed">Tergantung tingkat keparahan. Untuk keseleo biasanya 1-2 sesi. Untuk syaraf terjepit kronis biasanya membutuhkan 3-5 sesi rutin.</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-bold text-emerald-900 py-4 hover:text-amber-600 transition">
+                                <span>Apakah bisa melayani panggilan ke rumah?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <p class="text-xs text-gray-500 leading-relaxed">Ya, kami melayani panggilan darurat khusus untuk pasien yang sudah sulit berjalan atau dalam kondisi cedera akut.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 4: GALERI -->
+    <div id="gallery-page" class="page-content">
+        <section class="py-32 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-5xl font-bold text-emerald-900 italic">Dokumentasi Klinik</h2>
+                    <p class="text-gray-500 mt-4 italic">Kenyamanan dan kebersihan adalah prioritas kami</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="md:col-span-2 md:row-span-2" data-aos="zoom-in">
+                        <img src="https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover rounded-3xl shadow-lg hover:scale-[1.02] transition duration-500" alt="Terapi">
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="100">
+                        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=600&q=80" class="w-full h-64 object-cover rounded-3xl shadow-lg hover:scale-[1.02] transition duration-500" alt="Room">
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="200">
+                        <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=600&q=80" class="w-full h-64 object-cover rounded-3xl shadow-lg hover:scale-[1.02] transition duration-500" alt="Facility">
+                    </div>
+                    <div class="md:col-span-2" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="bg-emerald-900 rounded-3xl p-10 text-white flex items-center justify-between">
+                            <div>
+                                <h4 class="text-2xl font-bold italic mb-2">Ingin Konsultasi Foto Rontgen?</h4>
+                                <p class="text-xs text-emerald-100/60 italic">Kirimkan hasil diagnosa dokter Anda melalui WhatsApp untuk kami pelajari terlebih dahulu.</p>
+                            </div>
+                            <a href="https://wa.me/6287737061871" class="bg-amber-600 p-4 rounded-full hover:bg-amber-500 transition shadow-lg"><i class="fas fa-paper-plane"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 5: KONTAK -->
+    <div id="contact-page" class="page-content">
+        <section class="py-32 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-20">
+                    <div class="lg:w-1/2" data-aos="fade-right">
+                        <h2 class="text-5xl font-bold text-emerald-900 mb-6 italic tracking-tight">Terhubung Dengan Ahli Kami</h2>
+                        <p class="text-gray-500 mb-10 leading-relaxed italic">Jangan menunda kesembuhan Anda. Setiap detik sangat berharga untuk kesehatan syaraf Anda.</p>
+                        
+                        <div class="space-y-8">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-amber-600 shadow-sm mr-6 shrink-0">
+                                    <i class="fas fa-map-marked-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-emerald-900 mb-1 italic">Lokasi Utama</h5>
+                                    <p class="text-xs text-gray-500">M5RH+C89, Sendang, Walitelon Sel., Kec. Temanggung, Kabupaten Temanggung, Jawa Tengah</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-amber-600 shadow-sm mr-6 shrink-0">
+                                    <i class="fas fa-phone-volume text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-emerald-900 mb-1 italic">Layanan Pesan (WA)</h5>
+                                    <p class="text-xs text-gray-500">+62 877-3706-1871</p>
+                                    <p class="text-[10px] text-green-600 mt-1 uppercase font-bold italic tracking-tighter">Fast Response 08:00 - 21:00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-amber-600 shadow-sm mr-6 shrink-0">
+                                    <i class="fas fa-clock text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-emerald-900 mb-1 italic">Jam Operasional</h5>
+                                    <p class="text-xs text-gray-500">Setiap Hari: 08:00 - 20:00 WIB</p>
+                                    <p class="text-[10px] text-red-500 mt-1 uppercase font-bold italic tracking-tighter">Jumat: Buka Jam 13:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2" data-aos="fade-left">
+                        <div class="bg-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-900/5 -mr-16 -mt-16 rounded-full"></div>
+                            <h3 class="text-2xl font-bold text-emerald-900 mb-6 italic">Jadwalkan Kedatangan</h3>
+                            <form class="space-y-6" onsubmit="event.preventDefault();">
+                                <div>
+                                    <label class="text-[10px] uppercase font-bold tracking-widest text-gray-400 block mb-2 italic">Nama Lengkap</label>
+                                    <input type="text" placeholder="Masukkan nama Anda" class="w-full bg-gray-50 border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] uppercase font-bold tracking-widest text-gray-400 block mb-2 italic">Keluhan Utama</label>
+                                    <textarea rows="3" placeholder="Misal: Nyeri pinggang sudah 1 bulan..." class="w-full bg-gray-50 border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-amber-500 outline-none"></textarea>
+                                </div>
+                                <button type="button" onclick="window.location.href='https://wa.me/6287737061871'" class="w-full bg-emerald-900 text-white py-5 rounded-2xl font-bold shadow-xl hover:bg-emerald-800 transition uppercase tracking-widest text-xs flex items-center justify-center">
+                                    Kirim Melalui WhatsApp <i class="fab fa-whatsapp ml-3 text-xl"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google Maps -->
+        <section class="h-[500px] w-full grayscale contrast-125">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.0833216839356!2d110.1587375747683!3d-7.310793692697298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a83d7395022e3%3A0x6b907076a0845a70!2sWalitelon%20Sel.%2C%20Kec.%20Temanggung%2C%20Kabupaten%20Temanggung%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+                class="w-full h-full border-0" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </section>
+    </div>
+
+    <!-- Footer Megah -->
+    <footer class="bg-emerald-950 pt-20 pb-10 text-white">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <span class="text-amber-600 font-bold uppercase tracking-widest text-sm">Daftar Layanan</span>
-                <h2 class="text-5xl font-bold text-emerald-900 mt-2">Menu Relaksasi</h2>
-                <div class="w-24 h-1 bg-amber-500 mx-auto mt-6"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Item 1 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm service-hover transition-all duration-300 border border-gray-100" data-aos="fade-up">
-                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=600&q=80" class="h-56 w-full object-cover" alt="Traditional Massage">
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-2xl font-bold text-emerald-900">Pijat Tradisional</h3>
-                            <span class="text-amber-600 font-bold">120k</span>
-                        </div>
-                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">Penyelarasan otot secara menyeluruh untuk melancarkan peredaran darah dan meredakan letih.</p>
-                        <ul class="text-xs space-y-2 text-gray-400 mb-8">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Durasi 90 Menit</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Free Warm Tea</li>
-                        </ul>
-                        <a href="https://wa.me/6287737061871?text=Halo%20Pajar%20Pijat,%20saya%20mau%20booking%20Pijat%20Tradisional" class="block text-center border-2 border-emerald-900 text-emerald-900 py-3 rounded-full font-bold hover:bg-emerald-900 hover:text-white transition">Booking</a>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 border-b border-white/10 pb-16">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <a href="javascript:void(0)" onclick="navigateTo('home')" class="text-3xl font-bold flex items-center mb-6">
+                        <span class="bg-white text-emerald-950 p-2 rounded-lg mr-2">P</span>
+                        <span class="tracking-tighter italic">PAJAR<span class="text-amber-500">PIJAT</span></span>
+                    </a>
+                    <p class="text-emerald-100/60 text-sm leading-relaxed italic max-w-sm mb-8">
+                        Pusat terapi syaraf terjepit dan reposisi tulang belakang terkemuka di Temanggung. Mengembalikan kualitas hidup Anda melalui metode alami, aman, dan tanpa operasi.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-amber-600 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-amber-600 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-amber-600 transition"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
 
-                <!-- Item 2 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm service-hover transition-all duration-300 border border-gray-100" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&w=600&q=80" class="h-56 w-full object-cover" alt="Foot Reflexology">
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-2xl font-bold text-emerald-900">Refleksi Kaki</h3>
-                            <span class="text-amber-600 font-bold">85k</span>
-                        </div>
-                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">Titik tekan spesifik pada telapak kaki untuk menyeimbangkan fungsi organ dalam tubuh.</p>
-                        <ul class="text-xs space-y-2 text-gray-400 mb-8">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Durasi 60 Menit</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Essential Oil</li>
-                        </ul>
-                        <a href="https://wa.me/6287737061871?text=Halo%20Pajar%20Pijat,%20saya%20mau%20booking%20Refleksi" class="block text-center border-2 border-emerald-900 text-emerald-900 py-3 rounded-full font-bold hover:bg-emerald-900 hover:text-white transition">Booking</a>
-                    </div>
+                <!-- Navigation -->
+                <div>
+                    <h5 class="text-amber-500 font-bold uppercase tracking-widest text-xs mb-8 italic">Navigasi</h5>
+                    <ul class="space-y-4 text-sm text-emerald-100/60 italic font-medium">
+                        <li><a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-amber-500 transition">Beranda</a></li>
+                        <li><a href="javascript:void(0)" onclick="navigateTo('about')" class="hover:text-amber-500 transition">Tentang Kami</a></li>
+                        <li><a href="javascript:void(0)" onclick="navigateTo('services')" class="hover:text-amber-500 transition">Layanan Spesialis</a></li>
+                        <li><a href="javascript:void(0)" onclick="navigateTo('gallery')" class="hover:text-amber-500 transition">Galeri Fasilitas</a></li>
+                        <li><a href="javascript:void(0)" onclick="navigateTo('contact')" class="hover:text-amber-500 transition">Hubungi Kami</a></li>
+                    </ul>
                 </div>
 
-                <!-- Item 3 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm service-hover transition-all duration-300 border border-gray-100" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" class="h-56 w-full object-cover" alt="Hot Stone">
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-2xl font-bold text-emerald-900">Hot Stone Therapy</h3>
-                            <span class="text-amber-600 font-bold">180k</span>
-                        </div>
-                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">Penggunaan batu basal hangat untuk melemaskan otot tegang yang sangat mendalam.</p>
-                        <ul class="text-xs space-y-2 text-gray-400 mb-8">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Durasi 120 Menit</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Private Room</li>
-                        </ul>
-                        <a href="https://wa.me/6287737061871?text=Halo%20Pajar%20Pijat,%20saya%20mau%20booking%20Hot%20Stone" class="block text-center border-2 border-emerald-900 text-emerald-900 py-3 rounded-full font-bold hover:bg-emerald-900 hover:text-white transition">Booking</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Additional Info Section -->
-            <div class="mt-20 bg-emerald-900 text-white p-12 rounded-[40px]" data-aos="fade-up">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h3 class="text-3xl font-bold mb-4">Layanan Home Service</h3>
-                        <p class="text-emerald-100 mb-6">Malas keluar rumah? Terapis profesional kami siap datang ke hunian Anda di area Temanggung dan sekitarnya.</p>
-                        <ul class="space-y-4">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-amber-500 mr-3"></i> Terapis membawa peralatan lengkap</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-amber-500 mr-3"></i> Harga sama, cukup tambah transport</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-amber-500 mr-3"></i> Jaminan keamanan & profesionalisme</li>
-                        </ul>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-5xl font-bold text-amber-500 mb-4">Booking Via WA</p>
-                        <p class="mb-8">Tersedia jam 09.00 - 21.00 WIB</p>
-                        <a href="https://wa.me/6287737061871" class="bg-white text-emerald-900 px-12 py-5 rounded-full font-bold text-lg shadow-2xl inline-block hover:scale-105 transition-transform">Klik di Sini</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PAGE 4: GALERI (Gallery) -->
-    <div id="gallery-page" class="page-content py-32 bg-white">
-        <div class="container mx-auto px-6 text-center mb-16">
-            <h2 class="text-5xl font-bold text-emerald-900 mb-4">Suasana Relaksasi</h2>
-            <p class="text-gray-500">Melihat lebih dekat fasilitas dan momen di Pajar Pijat</p>
-        </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-6">
-            <div class="space-y-4">
-                <img src="https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-64 object-cover" data-aos="zoom-in" alt="Gallery 1">
-                <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-40 object-cover" data-aos="zoom-in" alt="Gallery 2">
-            </div>
-            <div class="space-y-4">
-                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-40 object-cover" data-aos="zoom-in" alt="Gallery 3">
-                <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-64 object-cover" data-aos="zoom-in" alt="Gallery 4">
-            </div>
-            <div class="space-y-4">
-                <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-64 object-cover" data-aos="zoom-in" alt="Gallery 5">
-                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-40 object-cover" data-aos="zoom-in" alt="Gallery 6">
-            </div>
-            <div class="space-y-4">
-                <img src="https://images.unsplash.com/photo-1537130508986-20f487fe939e?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-40 object-cover" data-aos="zoom-in" alt="Gallery 7">
-                <img src="https://images.unsplash.com/photo-1591343395902-1adcb454c2e4?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-64 object-cover" data-aos="zoom-in" alt="Gallery 8">
-            </div>
-        </div>
-
-        <div class="container mx-auto px-6 py-24">
-            <h3 class="text-3xl font-bold text-center mb-12 text-emerald-900">Apa Kata Mereka?</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-50 p-8 rounded-3xl" data-aos="fade-up">
-                    <div class="flex text-amber-500 mb-4 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-gray-600 mb-6 italic">"Tempatnya tenang sekali. Terapisnya sangat paham titik syaraf yang lelah. Begitu selesai, badan langsung ringan."</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-emerald-900 rounded-full mr-3"></div>
-                        <h5 class="font-bold">Andi, Temanggung</h5>
-                    </div>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex text-amber-500 mb-4 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-gray-600 mb-6 italic">"Layanan home service-nya sangat membantu buat saya yang sibuk. Terapis datang tepat waktu dan profesional."</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-emerald-900 rounded-full mr-3"></div>
-                        <h5 class="font-bold">Sari, Parakan</h5>
-                    </div>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex text-amber-500 mb-4 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-gray-600 mb-6 italic">"Harga yang ditawarkan sangat kompetitif dibanding kualitasnya yang premium. Berlangganan di sini sudah 2 tahun."</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-emerald-900 rounded-full mr-3"></div>
-                        <h5 class="font-bold">Hendra, Kedu</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PAGE 5: KONTAK (Contact) -->
-    <div id="contact-page" class="page-content py-32 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-20">
-                <div class="lg:w-1/2" data-aos="fade-right">
-                    <h2 class="text-5xl font-bold text-emerald-900 mb-8">Mari Terhubung</h2>
-                    <p class="text-gray-600 mb-12 text-lg">Hubungi kami melalui nomor telepon, email, atau datang langsung ke lokasi kami. Kami akan merespon pesan Anda secepat mungkin.</p>
-                    
-                    <div class="space-y-10">
-                        <div class="flex items-start">
-                            <div class="bg-emerald-900 text-white p-4 rounded-2xl mr-6 shadow-lg"><i class="fas fa-map-marked-alt text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold text-xl mb-1">Lokasi Kami</h4>
-                                <p class="text-gray-500">M5RH+C89, Sendang, Walitelon Sel., Kec. Temanggung, Kabupaten Temanggung, Jawa Tengah 56212</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-emerald-900 text-white p-4 rounded-2xl mr-6 shadow-lg"><i class="fas fa-phone-alt text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold text-xl mb-1">Telepon / WhatsApp</h4>
-                                <p class="text-gray-500">+62 877-3706-1871</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-emerald-900 text-white p-4 rounded-2xl mr-6 shadow-lg"><i class="fas fa-envelope text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold text-xl mb-1">Email Resmi</h4>
-                                <p class="text-gray-500">info@pajarpijat.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:w-1/2" data-aos="fade-left">
-                    <div class="bg-white p-10 rounded-[40px] shadow-2xl relative overflow-hidden border border-gray-100">
-                        <h3 class="text-2xl font-bold mb-6 text-emerald-900">Formulir Pesan</h3>
-                        <form class="space-y-6">
-                            <div class="grid grid-cols-2 gap-4">
-                                <input type="text" placeholder="Nama Depan" class="w-full px-6 py-4 bg-gray-100 rounded-2xl border-none focus:ring-2 focus:ring-amber-500 transition">
-                                <input type="text" placeholder="Nama Belakang" class="w-full px-6 py-4 bg-gray-100 rounded-2xl border-none focus:ring-2 focus:ring-amber-500 transition">
-                            </div>
-                            <input type="email" placeholder="Alamat Email" class="w-full px-6 py-4 bg-gray-100 rounded-2xl border-none focus:ring-2 focus:ring-amber-500 transition">
-                            <textarea placeholder="Bagaimana kami bisa membantu Anda?" rows="4" class="w-full px-6 py-4 bg-gray-100 rounded-2xl border-none focus:ring-2 focus:ring-amber-500 transition"></textarea>
-                            <button type="submit" class="w-full bg-emerald-900 text-white py-5 rounded-2xl font-bold hover:bg-amber-600 transition shadow-lg">Kirim Sekarang</button>
-                        </form>
-                    </div>
+                <!-- Contact Detail -->
+                <div>
+                    <h5 class="text-amber-500 font-bold uppercase tracking-widest text-xs mb-8 italic">Bantuan</h5>
+                    <ul class="space-y-6 text-sm text-emerald-100/60 italic font-medium">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-amber-500"></i>
+                            <span>Walitelon Sel., Temanggung, Jawa Tengah</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-whatsapp mr-3 text-amber-500 text-lg"></i>
+                            <span>+62 877-3706-1871</span>
+                        </li>
+                        <li class="flex items-center text-[10px] text-amber-500/80">
+                            <i class="fas fa-circle mr-2 animate-pulse"></i>
+                            <span class="uppercase tracking-widest font-bold">Terima Panggilan Darurat</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Maps Section -->
-            <div class="mt-24" data-aos="zoom-in">
-                <div class="rounded-[40px] overflow-hidden shadow-2xl h-96 w-full">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.0833216839356!2d110.1587375747683!3d-7.310793692697298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a83d7395022e3%3A0x6b907076a0845a70!2sWalitelon%20Sel.%2C%20Kec.%20Temanggung%2C%20Kabupaten%20Temanggung%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
-                        class="w-full h-full grayscale border-0" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
-                </div>
+            <div class="flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.2em] font-bold text-white/30 italic">
+                <div>&copy; 2024 Pajar Pijat. All Rights Reserved.</div>
+                <div class="mt-4 md:mt-0">Design by Premium Health Solution</div>
             </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-white py-20 border-t border-gray-100">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-emerald-900 mb-8">Pajar Pijat</h2>
-            <div class="flex justify-center space-x-6 mb-12">
-                <a href="#" class="text-gray-400 hover:text-amber-500 transition text-2xl"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="text-gray-400 hover:text-amber-500 transition text-2xl"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-gray-400 hover:text-amber-500 transition text-2xl"><i class="fab fa-youtube"></i></a>
-                <a href="https://wa.me/6287737061871" class="text-gray-400 hover:text-amber-500 transition text-2xl"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <div class="flex flex-wrap justify-center gap-8 mb-12 uppercase text-[10px] font-bold tracking-widest text-gray-400">
-                <a href="javascript:void(0)" onclick="navigateTo('home')">Home</a>
-                <a href="javascript:void(0)" onclick="navigateTo('about')">About</a>
-                <a href="javascript:void(0)" onclick="navigateTo('services')">Services</a>
-                <a href="javascript:void(0)" onclick="navigateTo('gallery')">Gallery</a>
-                <a href="javascript:void(0)" onclick="navigateTo('contact')">Contact</a>
-            </div>
-            <p class="text-sm text-gray-400">&copy; 2024 Pajar Pijat Temanggung. Dipersembahkan dengan ❤️ untuk kesehatan Anda.</p>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Init AOS
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 50
-        });
+        AOS.init({ duration: 1000, once: true });
 
-        // Navigation Logic (SPA behavior)
         function navigateTo(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.classList.remove('page-active');
-            });
-
-            // Show selected page
-            const selectedPage = document.getElementById(pageId + '-page');
-            if (selectedPage) {
-                selectedPage.classList.add('page-active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                // Re-trigger AOS for the new page
-                AOS.refresh();
-            }
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('page-active'));
+            document.getElementById(pageId + '-page').classList.add('page-active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            AOS.refresh();
         }
 
-        // Loader logic
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
-            }, 1000);
-        });
-
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('mainNav');
-            if (window.scrollY > 50) {
-                nav.classList.add('nav-scrolled');
-            } else {
-                nav.classList.remove('nav-scrolled');
-            }
+            nav.classList.toggle('nav-scrolled', window.scrollY > 50);
         });
 
-        // Mobile Menu Logic
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-            mobileMenu.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        });
+        menuBtn.onclick = () => mobileMenu.classList.replace('hidden', 'flex');
+        closeBtn.onclick = closeMobileMenu;
+        function closeMobileMenu() { mobileMenu.classList.replace('flex', 'hidden'); }
 
-        function closeMobileMenu() {
-            mobileMenu.classList.add('hidden');
-            mobileMenu.classList.remove('flex');
-            document.body.style.overflow = 'auto';
-        }
-
-        closeMenuBtn.addEventListener('click', closeMobileMenu);
-
-        // Simple form prevention
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = form.querySelector('input')?.value || "Pelanggan";
-                const message = `Halo Pajar Pijat, saya ${name} ingin bertanya...`;
-                window.open(`https://wa.me/6287737061871?text=${encodeURIComponent(message)}`, '_blank');
-            });
-        });
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1000);
+        };
     </script>
 </body>
 </html>
