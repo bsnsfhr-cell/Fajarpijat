@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pajar Pijat - Refleksi & Terapi Profesional Temanggung</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --primary: #1a3c34;
+            --secondary: #d4af37;
+            --bg-light: #fdfbf7;
+            --text-dark: #1f2937;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Page Transitions */
+        .page-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .page-active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Custom UI Elements */
+        .nav-scrolled {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #f1d37c 100%);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(26, 60, 52, 0.8), rgba(26, 60, 52, 0.8)), 
+                        url('https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 99;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .service-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-wrapper" id="loader">
+        <div class="text-white text-center">
+            <div class="inline-block w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+            <h2 class="text-xl font-bold tracking-widest">PAJAR PIJAT</h2>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="javascript:void(0)" onclick="navigateTo('home')" class="text-2xl font-bold text-emerald-900 flex items-center">
+                <span class="bg-emerald-900 text-white p-2 rounded-lg mr-2">P</span>
+                <span class="tracking-tighter">PAJAR<span class="text-amber-600">PIJAT</span></span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center uppercase text-xs font-bold tracking-widest text-gray-600">
+                <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-amber-600 transition">Beranda</a>
+                <a href="javascript:void(0)" onclick="navigateTo('about')" class="hover:text-amber-600 transition">Tentang</a>
+                <a href="javascript:void(0)" onclick="navigateTo('services')" class="hover:text-amber-600 transition">Layanan</a>
+                <a href="javascript:void(0)" onclick="navigateTo('gallery')" class="hover:text-amber-600 transition">Galeri</a>
+                <a href="javascript:void(0)" onclick="navigateTo('contact')" class="hover:text-amber-600 transition">Kontak</a>
+                <a href="https://wa.me/6287737061871" class="bg-emerald-900 text-white px-6 py-3 rounded-full hover:bg-emerald-800 transition shadow-lg">Booking</a>
+            </div>
+
+            <button class="md:hidden text-2xl" id="mobileMenuBtn">
+                <i class="fas fa-bars text-emerald-900"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="fixed inset-0 bg-emerald-900 z-[60] hidden flex-col justify-center items-center text-white space-y-8 text-2xl font-bold">
+        <button class="absolute top-8 right-8" id="closeMenuBtn"><i class="fas fa-times"></i></button>
+        <a href="javascript:void(0)" onclick="navigateTo('home'); closeMobileMenu()" class="hover:text-amber-400 transition">Beranda</a>
+        <a href="javascript:void(0)" onclick="navigateTo('about'); closeMobileMenu()" class="hover:text-amber-400 transition">Tentang</a>
+        <a href="javascript:void(0)" onclick="navigateTo('services'); closeMobileMenu()" class="hover:text-amber-400 transition">Layanan</a>
+        <a href="javascript:void(0)" onclick="navigateTo('gallery'); closeMobileMenu()" class="hover:text-amber-400 transition">Galeri</a>
+        <a href="javascript:void(0)" onclick="navigateTo('contact'); closeMobileMenu()" class="hover:text-amber-400 transition">Kontak</a>
+    </div>
+
+    <!-- WhatsApp Floating -->
+    <a href="https://wa.me/6287737061871" class="whatsapp-btn bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-2xl">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- PAGE 1: BERANDA (Home) -->
+    <div id="home-page" class="page-content page-active">
+        <!-- Hero Section -->
+        <section class="hero-section relative min-h-screen flex items-center pt-20 overflow-hidden">
+            <div class="container mx-auto px-6 relative z-10 text-white">
+                <div class="max-w-3xl" data-aos="fade-up">
+                    <span class="inline-block px-4 py-1 border border-amber-500 text-amber-500 rounded-full mb-6 font-bold tracking-widest text-sm uppercase">Pusat Relaksasi Temanggung</span>
+                    <h1 class="text-5xl md:text-8xl font-bold leading-tight mb-6">Tubuh Segar, Pikiran <span class="text-amber-500 italic">Tenang.</span></h1>
+                    <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl font-light leading-relaxed">
+                        Nikmati layanan pijat profesional dengan teknik terbaik untuk menghilangkan stres, lelah, dan mengembalikan energi vitalitas Anda secara maksimal.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/6287737061871" class="bg-amber-600 px-10 py-5 rounded-full font-bold hover:bg-amber-500 transition-all text-center shadow-xl hover:-translate-y-1">Reservasi Sekarang</a>
+                        <a href="javascript:void(0)" onclick="navigateTo('services')" class="backdrop-blur-md bg-white/10 px-10 py-5 rounded-full font-bold border border-white/20 hover:bg-white/20 transition-all text-center">Lihat Menu Layanan</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-20 bg-white border-b border-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center" data-aos="fade-up">
+                        <h3 class="text-4xl font-bold text-emerald-900 mb-2">1.5k+</h3>
+                        <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Pelanggan Puas</p>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-4xl font-bold text-emerald-900 mb-2">12+</h3>
+                        <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Terapis Ahli</p>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-4xl font-bold text-emerald-900 mb-2">10+</h3>
+                        <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Tahun Pengalaman</p>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-4xl font-bold text-emerald-900 mb-2">4.9</h3>
+                        <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Rating Layanan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Us Section -->
+        <section class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-16">
+                    <div class="md:w-1/2" data-aos="fade-right">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" class="rounded-[40px] shadow-2xl" alt="Layanan Pajar Pijat">
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-left">
+                        <h2 class="text-4xl font-bold text-emerald-900 mb-6">Mengapa Memilih <span class="text-amber-600">Pajar Pijat?</span></h2>
+                        <p class="text-gray-600 mb-8">Kami mengombinasikan warisan teknik pijat tradisional dengan standar kenyamanan modern untuk hasil yang optimal bagi tubuh Anda.</p>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-white p-3 rounded-xl shadow-sm mr-4 text-amber-600"><i class="fas fa-leaf"></i></div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Minyak Esensial Alami</h4>
+                                    <p class="text-sm text-gray-500">Menggunakan bahan organik untuk kesehatan kulit.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-white p-3 rounded-xl shadow-sm mr-4 text-amber-600"><i class="fas fa-hand-holding-heart"></i></div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Terapis Profesional</h4>
+                                    <p class="text-sm text-gray-500">Sertifikasi resmi dan berpengalaman di bidangnya.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-white p-3 rounded-xl shadow-sm mr-4 text-amber-600"><i class="fas fa-shield-alt"></i></div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Privasi Terjamin</h4>
+                                    <p class="text-sm text-gray-500">Ruangan privat dan steril untuk kenyamanan Anda.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-20 bg-emerald-900 text-white">
+            <div class="container mx-auto px-6 text-center" data-aos="zoom-in">
+                <h2 class="text-3xl font-bold mb-4">Ingin Promo Menarik?</h2>
+                <p class="text-emerald-200 mb-8">Dapatkan update layanan dan diskon khusus setiap bulannya melalui WhatsApp.</p>
+                <a href="https://wa.me/6287737061871" class="inline-block bg-white text-emerald-900 px-10 py-4 rounded-full font-bold hover:bg-amber-500 hover:text-white transition shadow-xl">Join WhatsApp List</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 2: TENTANG (About) -->
+    <div id="about-page" class="page-content py-32">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <span class="text-amber-600 font-bold tracking-widest uppercase text-sm">Cerita Kami</span>
+                    <h2 class="text-5xl font-bold text-emerald-900 mt-2">Didedikasikan Untuk <br> Kesejahteraan Anda</h2>
+                </div>
+                
+                <div class="prose prose-lg mx-auto text-gray-600 leading-relaxed mb-20" data-aos="fade-up">
+                    <p class="mb-6">Berawal dari keinginan untuk melestarikan kearifan lokal Temanggung dalam hal terapi kesehatan tradisional, <strong>Pajar Pijat</strong> didirikan sebagai oase di tengah kesibukan masyarakat modern. Kami memahami bahwa kesehatan fisik tidak dapat dipisahkan dari kedamaian pikiran.</p>
+                    <p class="mb-6">Selama lebih dari satu dekade, kami telah melayani ribuan pelanggan, mulai dari pekerja kantoran, atlet, hingga lansia. Setiap sentuhan yang diberikan oleh terapis kami memiliki tujuan: menyelaraskan kembali energi tubuh Anda yang terdistorsi oleh rutinitas.</p>
+                    <div class="bg-emerald-50 p-8 rounded-2xl border-l-4 border-amber-500 my-10 italic">
+                        "Visi kami adalah menjadi partner kesehatan terdepan di Jawa Tengah yang mengutamakan kualitas, ketulusan hati, dan kenyamanan pelanggan."
+                    </div>
+                </div>
+
+                <!-- Team Section -->
+                <h3 class="text-3xl font-bold text-center mb-12 text-emerald-900">Nilai Inti Kami</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm text-center" data-aos="fade-up">
+                        <i class="fas fa-heart text-amber-500 text-3xl mb-4"></i>
+                        <h4 class="font-bold text-lg mb-2 text-emerald-900">Ketulusan</h4>
+                        <p class="text-sm text-gray-500">Kami bekerja dengan hati untuk kesembuhan Anda.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm text-center" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fas fa-star text-amber-500 text-3xl mb-4"></i>
+                        <h4 class="font-bold text-lg mb-2 text-emerald-900">Kualitas</h4>
+                        <p class="text-sm text-gray-500">Standar terbaik untuk setiap detik pelayanan.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm text-center" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fas fa-sync text-amber-500 text-3xl mb-4"></i>
+                        <h4 class="font-bold text-lg mb-2 text-emerald-900">Inovasi</h4>
+                        <p class="text-sm text-gray-500">Selalu mengupdate teknik untuk hasil maksimal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: LAYANAN (Services) -->
+    <div id="services-page" class="page-content py-32 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <span class="text-amber-600 font-bold uppercase tracking-widest text-sm">Daftar Layanan</span>
+                <h2 class="text-5xl font-bold text-emerald-900 mt-2">Menu Relaksasi</h2>
+                <div class="w-24 h-1 bg-amber-500 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Item 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm service-hover transition-all duration-300 border border-gray-100" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=600&q=80" class="h-56 w-full object-cover" alt="Traditional Massage">
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold text-emerald-900">Pijat Tradisional</h3>
+                            <span class="text-amber-600 font-bold">120k</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">Penyelarasan otot secara menyeluruh untuk melancarkan peredaran darah dan meredakan letih.</p>
+                        <ul class="text-xs space-y-2 text-gray-400 mb-8">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Durasi 90 Menit</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Free Warm Tea</li>
+                        </ul>
+                        <a href="https://wa.me/6287737061871?text=Halo%20Pajar%20Pijat,%20saya%20mau%20booking%20Pijat%20Tradisional" class="block text-center border-2 border-emerald-900 text-emerald-900 py-3 rounded-full font-bold hover:bg-emerald-900 hover:text-white transition">Booking</a>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm service-hover transition-all duration-300 border border-gray-100" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&w=600&q=80" class="h-56 w-full object-cover" alt="Foot Reflexology">
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold text-emerald-900">Refleksi Kaki</h3>
+                            <span class="text-amber-600 font-bold">85k</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">Titik tekan spesifik pada telapak kaki untuk menyeimbangkan fungsi organ dalam tubuh.</p>
+                        <ul class="text-xs space-y-2 text-gray-400 mb-8">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Durasi 60 Menit</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Essential Oil</li>
+                        </ul>
+                        <a href="https://wa.me/6287737061871?text=Halo%20Pajar%20Pijat,%20saya%20mau%20booking%20Refleksi" class="block text-center border-2 border-emerald-900 text-emerald-900 py-3 rounded-full font-bold hover:bg-emerald-900 hover:text-white transition">Booking</a>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm service-hover transition-all duration-300 border border-gray-100" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" class="h-56 w-full object-cover" alt="Hot Stone">
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold text-emerald-900">Hot Stone Therapy</h3>
+                            <span class="text-amber-600 font-bold">180k</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">Penggunaan batu basal hangat untuk melemaskan otot tegang yang sangat mendalam.</p>
+                        <ul class="text-xs space-y-2 text-gray-400 mb-8">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Durasi 120 Menit</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Private Room</li>
+                        </ul>
+                        <a href="https://wa.me/6287737061871?text=Halo%20Pajar%20Pijat,%20saya%20mau%20booking%20Hot%20Stone" class="block text-center border-2 border-emerald-900 text-emerald-900 py-3 rounded-full font-bold hover:bg-emerald-900 hover:text-white transition">Booking</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Info Section -->
+            <div class="mt-20 bg-emerald-900 text-white p-12 rounded-[40px]" data-aos="fade-up">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4">Layanan Home Service</h3>
+                        <p class="text-emerald-100 mb-6">Malas keluar rumah? Terapis profesional kami siap datang ke hunian Anda di area Temanggung dan sekitarnya.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-amber-500 mr-3"></i> Terapis membawa peralatan lengkap</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-amber-500 mr-3"></i> Harga sama, cukup tambah transport</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-amber-500 mr-3"></i> Jaminan keamanan & profesionalisme</li>
+                        </ul>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-5xl font-bold text-amber-500 mb-4">Booking Via WA</p>
+                        <p class="mb-8">Tersedia jam 09.00 - 21.00 WIB</p>
+                        <a href="https://wa.me/6287737061871" class="bg-white text-emerald-900 px-12 py-5 rounded-full font-bold text-lg shadow-2xl inline-block hover:scale-105 transition-transform">Klik di Sini</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: GALERI (Gallery) -->
+    <div id="gallery-page" class="page-content py-32 bg-white">
+        <div class="container mx-auto px-6 text-center mb-16">
+            <h2 class="text-5xl font-bold text-emerald-900 mb-4">Suasana Relaksasi</h2>
+            <p class="text-gray-500">Melihat lebih dekat fasilitas dan momen di Pajar Pijat</p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-6">
+            <div class="space-y-4">
+                <img src="https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-64 object-cover" data-aos="zoom-in" alt="Gallery 1">
+                <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-40 object-cover" data-aos="zoom-in" alt="Gallery 2">
+            </div>
+            <div class="space-y-4">
+                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-40 object-cover" data-aos="zoom-in" alt="Gallery 3">
+                <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-64 object-cover" data-aos="zoom-in" alt="Gallery 4">
+            </div>
+            <div class="space-y-4">
+                <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-64 object-cover" data-aos="zoom-in" alt="Gallery 5">
+                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-40 object-cover" data-aos="zoom-in" alt="Gallery 6">
+            </div>
+            <div class="space-y-4">
+                <img src="https://images.unsplash.com/photo-1537130508986-20f487fe939e?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-40 object-cover" data-aos="zoom-in" alt="Gallery 7">
+                <img src="https://images.unsplash.com/photo-1591343395902-1adcb454c2e4?auto=format&fit=crop&w=400&q=80" class="rounded-2xl w-full h-64 object-cover" data-aos="zoom-in" alt="Gallery 8">
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 py-24">
+            <h3 class="text-3xl font-bold text-center mb-12 text-emerald-900">Apa Kata Mereka?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-3xl" data-aos="fade-up">
+                    <div class="flex text-amber-500 mb-4 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-6 italic">"Tempatnya tenang sekali. Terapisnya sangat paham titik syaraf yang lelah. Begitu selesai, badan langsung ringan."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-emerald-900 rounded-full mr-3"></div>
+                        <h5 class="font-bold">Andi, Temanggung</h5>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex text-amber-500 mb-4 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-6 italic">"Layanan home service-nya sangat membantu buat saya yang sibuk. Terapis datang tepat waktu dan profesional."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-emerald-900 rounded-full mr-3"></div>
+                        <h5 class="font-bold">Sari, Parakan</h5>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex text-amber-500 mb-4 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-6 italic">"Harga yang ditawarkan sangat kompetitif dibanding kualitasnya yang premium. Berlangganan di sini sudah 2 tahun."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-emerald-900 rounded-full mr-3"></div>
+                        <h5 class="font-bold">Hendra, Kedu</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 5: KONTAK (Contact) -->
+    <div id="contact-page" class="page-content py-32 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-20">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <h2 class="text-5xl font-bold text-emerald-900 mb-8">Mari Terhubung</h2>
+                    <p class="text-gray-600 mb-12 text-lg">Hubungi kami melalui nomor telepon, email, atau datang langsung ke lokasi kami. Kami akan merespon pesan Anda secepat mungkin.</p>
+                    
+                    <div class="space-y-10">
+                        <div class="flex items-start">
+                            <div class="bg-emerald-900 text-white p-4 rounded-2xl mr-6 shadow-lg"><i class="fas fa-map-marked-alt text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-1">Lokasi Kami</h4>
+                                <p class="text-gray-500">M5RH+C89, Sendang, Walitelon Sel., Kec. Temanggung, Kabupaten Temanggung, Jawa Tengah 56212</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-emerald-900 text-white p-4 rounded-2xl mr-6 shadow-lg"><i class="fas fa-phone-alt text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-1">Telepon / WhatsApp</h4>
+                                <p class="text-gray-500">+62 877-3706-1871</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-emerald-900 text-white p-4 rounded-2xl mr-6 shadow-lg"><i class="fas fa-envelope text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-1">Email Resmi</h4>
+                                <p class="text-gray-500">info@pajarpijat.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <div class="bg-white p-10 rounded-[40px] shadow-2xl relative overflow-hidden border border-gray-100">
+                        <h3 class="text-2xl font-bold mb-6 text-emerald-900">Formulir Pesan</h3>
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" placeholder="Nama Depan" class="w-full px-6 py-4 bg-gray-100 rounded-2xl border-none focus:ring-2 focus:ring-amber-500 transition">
+                                <input type="text" placeholder="Nama Belakang" class="w-full px-6 py-4 bg-gray-100 rounded-2xl border-none focus:ring-2 focus:ring-amber-500 transition">
+                            </div>
+                            <input type="email" placeholder="Alamat Email" class="w-full px-6 py-4 bg-gray-100 rounded-2xl border-none focus:ring-2 focus:ring-amber-500 transition">
+                            <textarea placeholder="Bagaimana kami bisa membantu Anda?" rows="4" class="w-full px-6 py-4 bg-gray-100 rounded-2xl border-none focus:ring-2 focus:ring-amber-500 transition"></textarea>
+                            <button type="submit" class="w-full bg-emerald-900 text-white py-5 rounded-2xl font-bold hover:bg-amber-600 transition shadow-lg">Kirim Sekarang</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maps Section -->
+            <div class="mt-24" data-aos="zoom-in">
+                <div class="rounded-[40px] overflow-hidden shadow-2xl h-96 w-full">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.0833216839356!2d110.1587375747683!3d-7.310793692697298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a83d7395022e3%3A0x6b907076a0845a70!2sWalitelon%20Sel.%2C%20Kec.%20Temanggung%2C%20Kabupaten%20Temanggung%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+                        class="w-full h-full grayscale border-0" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-20 border-t border-gray-100">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-emerald-900 mb-8">Pajar Pijat</h2>
+            <div class="flex justify-center space-x-6 mb-12">
+                <a href="#" class="text-gray-400 hover:text-amber-500 transition text-2xl"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-400 hover:text-amber-500 transition text-2xl"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-amber-500 transition text-2xl"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/6287737061871" class="text-gray-400 hover:text-amber-500 transition text-2xl"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8 mb-12 uppercase text-[10px] font-bold tracking-widest text-gray-400">
+                <a href="javascript:void(0)" onclick="navigateTo('home')">Home</a>
+                <a href="javascript:void(0)" onclick="navigateTo('about')">About</a>
+                <a href="javascript:void(0)" onclick="navigateTo('services')">Services</a>
+                <a href="javascript:void(0)" onclick="navigateTo('gallery')">Gallery</a>
+                <a href="javascript:void(0)" onclick="navigateTo('contact')">Contact</a>
+            </div>
+            <p class="text-sm text-gray-400">&copy; 2024 Pajar Pijat Temanggung. Dipersembahkan dengan ❤️ untuk kesehatan Anda.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 50
+        });
+
+        // Navigation Logic (SPA behavior)
+        function navigateTo(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('page-active');
+            });
+
+            // Show selected page
+            const selectedPage = document.getElementById(pageId + '-page');
+            if (selectedPage) {
+                selectedPage.classList.add('page-active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Re-trigger AOS for the new page
+                AOS.refresh();
+            }
+        }
+
+        // Loader logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 1000);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+
+        // Simple form prevention
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = form.querySelector('input')?.value || "Pelanggan";
+                const message = `Halo Pajar Pijat, saya ${name} ingin bertanya...`;
+                window.open(`https://wa.me/6287737061871?text=${encodeURIComponent(message)}`, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
+
